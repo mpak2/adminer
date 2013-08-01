@@ -125,8 +125,9 @@ if (!$fields) {
 } else {
 	echo "<table cellspacing='0' onkeydown='return editingKeydown(event);'>\n";
 
-	foreach ($fields as $name => $field) {
+	foreach ($fields as $name => $field) {// echo "<pre>"; print_r(bracket_escape($name)); echo "</pre>";
 		echo "<tr><th>" . $adminer->fieldName($field);
+//		print_r($_GET["set"][bracket_escape($name)]);
 		$default = $_GET["set"][bracket_escape($name)];
 		if ($default === null) {
 			$default = $field["default"];
@@ -146,7 +147,7 @@ if (!$fields) {
 			$value = "";
 			$function = "now";
 		}
-		input($field, $value, $function);
+		input($field, $value?$value:$default , $function);
 		echo "\n";
 	}
 
